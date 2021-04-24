@@ -1,47 +1,79 @@
-const handArray = ["rock", "paper", "scissors"];
+const ROCK = "Rock";
+const PAPER = "Paper";
+const SCISSORS = "Scissors";
+const handArray = [ROCK, PAPER, SCISSORS];
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorsButton = document.querySelector("#scissors");
+const playerScoreDisplay = document.querySelector("#player-score");
+const computerScoreDisplay = document.querySelector("#computer-score");
+const roundMessage = document.querySelector("#round-message");
+const roundNumberDisplay = document.querySelector("#round-number");
 
-playGame();
+let playerScore = 0;
+let computerScore = 0;
+let roundNumber = 1;
 
-function playGame() {
-    let playerScore = 0;
-    let computerScore = 0;
-    for (i = 0; i < 5; i++) {
-        roundWinner = playRound(window.prompt("Rock, Paper, or Scissors?").toLowerCase(),getComputerHand());
-        if (roundWinner == "player") {
-            playerScore += 1;
-        }
-        else if (roundWinner == "computer") {
-            computerScore += 1;
-        }
-    }
-    if (playerScore === computerScore) {
-        console.log(`Tie game, the score is ${playerScore} to ${computerScore}`);
-    }
-    else if (playerScore > computerScore) {
-        console.log(`You win, the score is ${playerScore} to ${computerScore}`);
+rockButton.addEventListener("click", function() {
+    roundMessage.innerText = playRound(ROCK);
+    playerScoreDisplay.innerText = playerScore;
+    computerScoreDisplay.innerText = computerScore;
+    roundNumberDisplay.innerText = roundNumber;
+    if (playerScore === 5 || computerScore === 5){
+        endGame();
+    };
+});
+
+paperButton.addEventListener("click", function() {
+    roundMessage.innerText = playRound(PAPER);
+    playerScoreDisplay.innerText = playerScore;
+    computerScoreDisplay.innerText = computerScore;
+    roundNumberDisplay.innerText = roundNumber;
+    if (playerScore === 5 || computerScore === 5){
+        endGame();
+    };
+});
+
+scissorsButton.addEventListener("click", function() {
+    roundMessage.innerText = playRound(SCISSORS);
+    playerScoreDisplay.innerText = playerScore;
+    computerScoreDisplay.innerText = computerScore;
+    roundNumberDisplay.innerText = roundNumber;
+    if (playerScore === 5 || computerScore === 5){
+        endGame();
+    };
+});
+
+function endGame() {
+    rockButton.className = "hidden";
+    paperButton.className = "hidden";
+    scissorsButton.className = "hidden";
+    if (playerScore > computerScore) {
+        roundMessage.innerText = "You win!"
     }
     else {
-        console.log(`You lose, the score is ${playerScore} to ${computerScore}`);
+        roundMessage.innerText = "You lose!"
     }
-}
+};
 
 function getComputerHand() {
     return handArray[Math.floor(Math.random() * handArray.length)];
 }
+function playRound(playerHand) {
+    let computerHand = getComputerHand();
+    roundNumber++;
 
-function playRound(playerHand, computerHand) {
     if (playerHand === computerHand) {
-        console.log(`This round is a tie, ${playerHand} is the same as ${computerHand}`)
-        return "tie";
+        return(`This round is a tie, ${playerHand} is the same as ${computerHand}`);
     }
-    else if (playerHand === "rock" && computerHand === "scissors" || 
-        playerHand === "paper" && computerHand === "rock" || 
-        playerHand === "scissors" && computerHand === "paper") {
-        console.log(`You win this round, ${playerHand} beats ${computerHand}`)
-        return "player";
+    else if (playerHand === ROCK && computerHand === SCISSORS || 
+        playerHand === PAPER && computerHand === ROCK || 
+        playerHand === SCISSORS && computerHand === PAPER) {
+        playerScore++;
+        return (`You win this round, ${playerHand} beats ${computerHand}`);
     }
     else {
-        console.log(`You lose this round, ${computerHand} beats ${playerHand}`);
-        return "computer";
+        computerScore++;
+        return (`You lose this round, ${computerHand} beats ${playerHand}`);
     }
 }

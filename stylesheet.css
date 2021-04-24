@@ -1,0 +1,53 @@
+* {
+    margin:0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header {
+    padding: 20px;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+#score-board {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: solid 2px black;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 40px;
+    padding: 20px 50px;
+    margin: 50px 0px 20px 0px;
+    position: relative;
+}
+
+.label {
+    font-size: 20px;
+    margin: 0px 40px;
+}
+
+.message {
+    font-size: 40px;
+    margin: 20px 0px;
+}
+
+#buttons {
+    margin-top: 20px;
+}
+
+.player-button {
+    font-size: 40px;
+    width: 200px;
+    padding: 10px 0px;
+}
